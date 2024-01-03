@@ -8,9 +8,15 @@ class THUMBNAIL:
 
 
 class Config:
+    # http服务配置
+    HOST = '0.0.0.0'
+    PORT = 6501
+    DEBUG = True
+    # 图片服务配置
     HTTP_ROOT_PATH = '/api/img'
     STATIC_FOLDER = 'app/static/'
-    SECRET_KEY = 'your_secret_key'
+    # 允许上传的图片类型
+    ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'bmp', 'webp', 'svg', 'ico'}
     # 图片上传位置
     UPLOAD_FOLDER = STATIC_FOLDER + 'images/original'
     # 缩略图列表，按需填写，不填写则不生成缩略图

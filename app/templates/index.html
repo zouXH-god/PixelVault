@@ -2,12 +2,35 @@
 <html>
 <head>
     <title>Image Hosting App</title>
+    <link rel="stylesheet" href="/static/css/index.css">
 </head>
 <body>
     <h1>Upload Image</h1>
     <form method="post" enctype="multipart/form-data">
-        <input type="file" name="image">
+        <input type="file" name="image" multiple>
         <input type="submit" value="Upload">
     </form>
+    <h1>Images</h1>
+    <ul class="img_box_ul">
+        {% for img in img_list %}
+        	<li class="img_box">
+                <img class="show_img" src="{{ img.url }}&size=100x100" alt="{{ img.filename }}">
+{#                <p class="show_img_name">{{ img.filename }}</p>#}
+                <div class="copy_list">
+                    <button class="copy_btn" onclick="copy_url('{{ img.url }}')">
+                        原图
+                    </button>
+                    {% for thumbnail in img.thumbnails %}
+                    	<button class="copy_btn" onclick="copy_url('{{ thumbnail.url }}')">
+                            {{ thumbnail.size }}
+                        </button>
+                    {% endfor %}
+
+                </div>
+            </li>
+        {% endfor %}
+
+    </ul>
 </body>
+<script src="/static/js/index.js"></script>
 </html>

@@ -107,3 +107,25 @@ def cut_dir(path):
             os.mkdir(dirs)
 
 
+# 获取图片列表
+def get_image_list():
+    image_list = []
+    for root, dirs, files in os.walk(Config.UPLOAD_FOLDER):
+        for file in files:
+            if file.split('.')[-1].lower() in Config.ALLOWED_EXTENSIONS:
+                # 如果有指定缩略图大小，则返回缩略图
+                thumbnail_list = []
+                if Config.THUMBNAIL_SIZE:
+                    for thumbnail in Config.THUMBNAIL_SIZE:
+                        thumbnail_list.append({
+                            'size': f"{thumbnail.SIZE[0]}x{thumbnail.SIZE[1]}",
+                            'url': f"{Config.HTTP_ROOT_PATH}?filename={file}&size={thumbnail.SIZE[0]}x{thumbnail.SIZE[1]}"
+                        })
+                    print(thumbnail_list)
+                image_list.append({
+                    'path': os.path.join(root, file),
+                    'filename': file,
+                    'url': f"{Config.HTTP_ROOT_PATH}?filename={file}",
+                    "thumbnails": thumbnail_list,
+                })
+    return image_list

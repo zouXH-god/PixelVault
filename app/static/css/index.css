@@ -1,0 +1,44 @@
+:root{
+    --img_width: 100px;
+}
+
+li{
+    list-style: none;
+}
+
+.img_box_ul{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+}
+.img_box{
+    /*height: 320px;*/
+    width: var(--img_width);
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 5px;
+}
+.show_img{
+    width: var(--img_width);
+    height: var(--img_width);
+    object-fit: contain;
+}
+.show_img_name{
+    width: 100%;
+    position: absolute;
+    bottom: 32px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    text-align: center;
+    background-color: #9999;
+    color: #fff;
+    height: 32px;
+    line-height: 32px;
+}
+.copy_list{
+    display: flex;
+    flex-wrap: wrap;
+}
