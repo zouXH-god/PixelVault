@@ -42,3 +42,32 @@ li{
     display: flex;
     flex-wrap: wrap;
 }
+.upload-box {
+        border: 2px dashed #007bff;
+        border-radius: 5px;
+        padding: 30px;
+        text-align: center;
+        color: #007bff;
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        cursor: pointer;
+    }
+
+    .upload-box:hover {
+        background-color: #f8f9fa;
+    }
+
+    .upload-box.drag-over {
+        background-color: #007bff;
+        color: white;
+    }
+
+    input[type="file"] {
+        display: none;
+    }
+
+    .file-list {
+        margin-top: 10px;
+        font-family: Arial, sans-serif;
+        color: #333;
+    }

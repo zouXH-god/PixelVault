@@ -7,7 +7,11 @@
 <body>
     <h1>Upload Image</h1>
     <form method="post" enctype="multipart/form-data">
-        <input type="file" name="image" multiple>
+        <div id="upload-box" class="upload-box">
+            点击选择文件，或将文件拖拽到此处
+        </div>
+        <input id="upload-box-files" class="upload-box-files" type="file" name="image" multiple>
+        <ul id="file-list-display" class="file-list"></ul>
         <input type="submit" value="Upload">
     </form>
     <h1>Images</h1>

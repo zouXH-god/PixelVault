@@ -36,3 +36,50 @@ async function copy_value(text) {
   // 移除临时创建的 textarea
   document.body.removeChild(textarea);
 }
+
+function setupDragAndDrop() {
+    const dropArea = document.getElementById('upload-box');
+    const fileInput = document.getElementById('upload-box-files');
+    const fileListDisplay = document.getElementById('file-list-display');
+
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+        dropArea.addEventListener(eventName, preventDefaults, false);
+    });
+
+    function preventDefaults(e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+
+    ['dragenter', 'dragover'].forEach(eventName => {
+        dropArea.addEventListener(eventName, () => dropArea.classList.add('drag-over'), false);
+    });
+
+    ['dragleave', 'drop'].forEach(eventName => {
+        dropArea.addEventListener(eventName, () => dropArea.classList.remove('drag-over'), false);
+    });
+
+    dropArea.addEventListener('drop', e => {
+        fileInput.files = e.dataTransfer.files;
+        displayFiles(fileInput.files);
+    }, false);
+
+    dropArea.addEventListener('click', () => {
+        fileInput.click();
+    }, false);
+
+    fileInput.addEventListener('change', () => {
+        displayFiles(fileInput.files);
+    }, false);
+
+    function displayFiles(files) {
+        fileListDisplay.innerHTML = '';
+        for (const file of files) {
+            const listItem = document.createElement('li');
+            listItem.textContent = file.name;
+            fileListDisplay.appendChild(listItem);
+        }
+    }
+}
+
+window.onload = setupDragAndDrop;
