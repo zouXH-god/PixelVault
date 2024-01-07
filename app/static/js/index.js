@@ -24,7 +24,7 @@ async function copy_value(text) {
   textarea.focus();
   textarea.select();
 
-  try {
+  try { 
     // 执行复制命令
     const successful = document.execCommand('copy');
     const msg = successful ? 'successful' : 'unsuccessful';
