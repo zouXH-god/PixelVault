@@ -5,6 +5,31 @@
 li{
     list-style: none;
 }
+input, button{
+    outline: none;
+    border: none;
+    height: 32px;
+    line-height: 32px;
+    padding: 0 8px;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 14px;
+    color: #333;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    transition: all 0.3s;
+}
+input:focus{
+    border: 1px solid #0088ff;
+    box-shadow: #0088ff5e 0 0 3px 2px;
+}
+input[type="submit"], button{
+    background-color: #0088ff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+}
 
 .img_box_ul{
     display: flex;
@@ -20,6 +45,9 @@ li{
     border-radius: 8px;
     overflow: hidden;
     margin: 5px;
+    padding: 3px 5px;
+    box-sizing: border-box;
+    border: 1px solid #e1e0e0;
 }
 .show_img{
     width: var(--img_width);
@@ -42,32 +70,78 @@ li{
     display: flex;
     flex-wrap: wrap;
 }
+.copy_btn{
+    width: 100%;
+    height: 32px;
+    line-height: 32px;
+    margin: 5px 0;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 4px;
+    background-color: #aed2ef;
+    color: #fff;
+    transition: all 0.3s;
+
+}
+.copy_btn:hover{
+    background-color: #0088ff;
+}
+.update_form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 .upload-box {
-        border: 2px dashed #007bff;
-        border-radius: 5px;
-        padding: 30px;
-        text-align: center;
-        color: #007bff;
-        font-family: Arial, sans-serif;
-        margin: 20px;
-        cursor: pointer;
-    }
+    border: 2px dashed #007bff;
+    border-radius: 5px;
+    padding: 30px;
+    text-align: center;
+    color: #007bff;
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    cursor: pointer;
+}
 
-    .upload-box:hover {
-        background-color: #f8f9fa;
-    }
+.upload-box:hover {
+    background-color: #f8f9fa;
+}
 
-    .upload-box.drag-over {
-        background-color: #007bff;
-        color: white;
-    }
+.upload-box.drag-over {
+    background-color: #007bff;
+    color: white;
+}
 
-    input[type="file"] {
-        display: none;
-    }
+input[type="file"] {
+    display: none;
+}
 
-    .file-list {
-        margin-top: 10px;
-        font-family: Arial, sans-serif;
-        color: #333;
-    }
+.file-list {
+    margin-top: 10px;
+    font-family: Arial, sans-serif;
+    color: #333;
+    display: flex;
+}
+.file-list li{
+    padding: 0 10px;
+    border-right: 1px solid #ccc;
+    position: relative;
+}
+.update_file_btn{
+    width: 120px;
+    height: 32px;
+    line-height: 32px;
+}
+
+.img_box_ul{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+}
+.img_box_ul h1{
+    width: 100%;
+    text-align: center;
+    margin: 10px 0;
+}
