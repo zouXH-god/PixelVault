@@ -30,4 +30,7 @@ class Config:
     # 添加水印
     ADD_WATERMARK = False
     WATERMARK_PATH = STATIC_FOLDER + 'images/watermark/log_w.png'
+    # MySQL数据库URI
+    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://PixelVault:7NGTSXrrweTrXft6@localhost/pixelvault'
+
 
