@@ -4,7 +4,7 @@ from config import Config
 from db import ProcessedImage, Image
 from db.tools import update_db
 from tools import Image_tools
-from .utils import save_image, get_image_list
+from .utils import save_image, get_image_list, cut_dir
 import os
 
 main = Blueprint('main', __name__)
@@ -59,6 +59,7 @@ def img():
             img.crop((width, height))
             # 保存缩略图
             save_path, img_id = update_db(img.get_image(), image_id=image_id, processing_method=f"thumbnail")
+            cut_dir(save_path)
             img.save(save_path)
             file_path = save_path
     else:

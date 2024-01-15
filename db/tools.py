@@ -14,6 +14,8 @@ def update_db(image: PILImage, file_type: str = "jpeg", original_name: str = Non
     # 拼接文件名
     timestamp = time.time()
     saved_name = f"{timestamp}.{file_type}"
+    # 获取当天日期 作为文件夹名
+    date = time.strftime("%Y-%m-%d", time.localtime(timestamp))
     # 获取图片大小（字节）
     img_io = BytesIO()
     if file_type == "jpg":
@@ -22,7 +24,7 @@ def update_db(image: PILImage, file_type: str = "jpeg", original_name: str = Non
     img_size = img_io.tell()
     # 上传数据库
     if original_name:
-        save_path = os.path.join(Config.UPLOAD_FOLDER, saved_name)
+        save_path = os.path.join(Config.UPLOAD_FOLDER, date, saved_name)
         im = Image(
             original_name=original_name,
             saved_name=saved_name,
@@ -34,7 +36,7 @@ def update_db(image: PILImage, file_type: str = "jpeg", original_name: str = Non
             uploader_id=1
         )
     elif processing_method and image_id:
-        save_path = os.path.join(Config.UPLOAD_FOLDER, saved_name)
+        save_path = os.path.join(Config.TREATMENT_SAVE_PATH, date, saved_name)
         im = ProcessedImage(
             image_id=image_id,
             saved_name=saved_name,
