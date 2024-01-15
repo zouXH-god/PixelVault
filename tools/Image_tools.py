@@ -126,12 +126,24 @@ class IM:
         self.image = new_img
 
     # 获取图片
-    def get_image(self):
+    def get_image(self, get_type = None):
         """
         获取图片
         :return:
         """
-        img = self.image
-        img_byte_arr = BytesIO()
-        img.save(img_byte_arr, format=self.img_type, quality=self.quality)
-        return img_byte_arr.getvalue()
+        if get_type == "bytes":
+            img = self.image
+            img_byte_arr = BytesIO()
+            img.save(img_byte_arr, format=self.img_type, quality=self.quality)
+            return img_byte_arr.getvalue()
+        else:
+            return self.image
+
+    # 保存图片
+    def save(self, path):
+        """
+        保存图片
+        :param path: 保存路径
+        :return:
+        """
+        self.image.save(path, format=self.img_type, quality=self.quality)

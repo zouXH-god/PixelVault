@@ -4,7 +4,7 @@ from typing import List
 class THUMBNAIL:
     def __init__(self, size: tuple, STATIC_FOLDER=None):
         self.SIZE = size
-        self.SAVE_PATH = f'{STATIC_FOLDER}images/thumbnails/{self.SIZE[0]}x{self.SIZE[1]}'
+        self.SAVE_PATH = f'{STATIC_FOLDER}images/treatment'
 
 
 class Config:
@@ -17,8 +17,10 @@ class Config:
     STATIC_FOLDER = 'app/static/'
     # 允许上传的图片类型
     ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'bmp', 'webp', 'svg', 'ico'}
-    # 图片上传位置
+    # 原图上传位置
     UPLOAD_FOLDER = STATIC_FOLDER + 'images/original'
+    # 处理后图片保存位置
+    TREATMENT_SAVE_PATH = f'{STATIC_FOLDER}images/treatment'
     # 缩略图列表，按需填写，不填写则不生成缩略图
     THUMBNAIL_SIZE: List[THUMBNAIL] = [
         THUMBNAIL((100, 100), STATIC_FOLDER),
