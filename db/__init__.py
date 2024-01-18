@@ -18,7 +18,8 @@ class User(db.Model):
     password = db.Column(db.String(120), nullable=False)
     creation_time = db.Column(db.DateTime, default=datetime.utcnow)
     email = db.Column(db.String(120), unique=True, nullable=False)
-    phone = db.Column(db.String(20), unique=True, nullable=True)
+    phone = db.Column(db.String(20), unique=True, nullable=False)
+    token = db.Column(db.String(120), nullable=True)
 
     images = db.relationship('Image', backref='uploader', lazy=True)
 

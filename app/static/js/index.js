@@ -29,6 +29,7 @@ async function copy_value(text) {
     const successful = document.execCommand('copy');
     const msg = successful ? 'successful' : 'unsuccessful';
     console.log('Copy command was ' + msg);
+    showToast("已复制到粘贴板")
   } catch (err) {
     console.error('Unable to copy', err);
   }
@@ -83,3 +84,52 @@ function setupDragAndDrop() {
 }
 
 window.onload = setupDragAndDrop;
+
+function show_img(url, data) {
+    document.getElementById("img_info_box_fix").style.display = "block";
+    document.getElementById("other_btn").innerHTML = "";
+    var img = document.getElementById('img_pic');
+    img.src = url + "&width=300";
+    document.getElementById("copy_btn_orange").onclick = function () {
+        copy_url(url)
+    };
+    console.log(data)
+    for (const index in data) {
+        var button = document.createElement('button');
+        button.className = "copy_btn";
+        button.textContent = data[index].size;
+        button.onclick = function () {
+            copy_url(data[index].url)
+        };
+        document.getElementById("other_btn").appendChild(button)
+    }
+    return false
+}
+
+
+function showToast(message) {
+    // 创建提示框元素
+    var toast = document.createElement('div');
+
+    // 设置提示框内容和样式
+    toast.textContent = message;
+    toast.style.position = 'fixed';
+    toast.style.left = '50%';
+    toast.style.top = '50%';
+    toast.style.transform = 'translate(-50%, -50%)';
+    toast.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+    toast.style.color = 'white';
+    toast.style.padding = '16px';
+    toast.style.borderRadius = '4px';
+    toast.style.zIndex = 1000;
+    toast.style.display = 'block';
+
+    // 将提示框添加到文档中
+    document.body.appendChild(toast);
+
+    // 3秒后自动移除提示框
+    setTimeout(function() {
+        document.body.removeChild(toast);
+    }, 1000);
+}
+

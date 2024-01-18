@@ -28,6 +28,7 @@ class Config:
         THUMBNAIL((400, 400), STATIC_FOLDER),
         THUMBNAIL((300, 200), STATIC_FOLDER),
         THUMBNAIL((600, 400), STATIC_FOLDER),
+        THUMBNAIL((300, "auto"), STATIC_FOLDER),
     ]
     # 添加水印
     ADD_WATERMARK = False

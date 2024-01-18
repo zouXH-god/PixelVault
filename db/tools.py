@@ -9,7 +9,14 @@ from db import Image, ProcessedImage, db
 
 
 # 将数据上传数据库，并返回id
-def update_db(image: PILImage, file_type: str = "jpeg", original_name: str = None, processing_method: str = None, image_id: int = None):
+def update_db(
+        image: PILImage,
+        uid: str = "",
+        file_type: str = "jpeg",
+        original_name: str = None,
+        processing_method: str = None,
+        image_id: int = None
+):
     file_type = file_type.lower()
     # 拼接文件名
     timestamp = time.time()
@@ -33,7 +40,7 @@ def update_db(image: PILImage, file_type: str = "jpeg", original_name: str = Non
             width=image.width,
             height=image.height,
             original_url=save_path,
-            uploader_id=1
+            uploader_id=uid
         )
     elif processing_method and image_id:
         save_path = os.path.join(Config.TREATMENT_SAVE_PATH, date, saved_name)

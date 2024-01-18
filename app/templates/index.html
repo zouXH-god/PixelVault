@@ -3,38 +3,58 @@
 <head>
     <title>Image Hosting App</title>
     <link rel="stylesheet" href="/static/css/index.css">
+    <link rel="stylesheet" href="/static/css/nav.css">
 </head>
-<body>
-    <form class="update_form" method="post" enctype="multipart/form-data">
-        <h1>图片上传</h1>
-        <div id="upload-box" class="upload-box">
-            点击选择文件，或将文件拖拽到此处
+<body id="body">
+<header class="header">
+    <nav class="nav">
+        <div class="nav-left">
+
         </div>
-        <input id="upload-box-files" class="upload-box-files" type="file" name="image" multiple>
-        <ul id="file-list-display" class="file-list"></ul>
-        <input class="update_file_btn" typeof="" type="submit" value="上传">
-    </form>
+        <div class="nav-right">
+            <a href="/login">登出</a>
+        </div>
+    </nav>
+</header>
+    <div class="top">
+        <form class="update_form" method="post" enctype="multipart/form-data">
+            <div id="upload-box" class="upload-box">
+                点击选择文件，或将文件拖拽到此处
+            </div>
+            <input id="upload-box-files" class="upload-box-files" type="file" name="image" multiple>
+            <ul id="file-list-display" class="file-list"></ul>
+            <input class="update_file_btn" typeof="" type="submit" value="上传">
+        </form>
+
+    </div>
+<div class="box">
     <ul class="img_box_ul">
-        <h1>图片列表</h1>
+        <h2> <span class="line"></span> 图片列表</h2>
         {% for img in img_list %}
         	<li class="img_box">
-                <img class="show_img" src="{{ img.url }}&size=100x100" alt="{{ img.filename }}">
-{#                <p class="show_img_name">{{ img.filename }}</p>#}
-                <div class="copy_list">
-                    <button class="copy_btn" onclick="copy_url('{{ img.url }}')">
-                        原图
-                    </button>
-                    {% for thumbnail in img.thumbnails %}
-                    	<button class="copy_btn" onclick="copy_url('{{ thumbnail.url }}')">
-                            {{ thumbnail.size }}
-                        </button>
-                    {% endfor %}
-
-                </div>
+                <img class="show_img"
+                     src="{{ img.url }}&size=100x100"
+                     alt="{{ img.filename }}"
+                    onclick="show_img('{{ img.url }}', {{ img.thumbnails }})"
+                >
             </li>
         {% endfor %}
 
     </ul>
+</div>
+<div class="img_info_box_fix" id="img_info_box_fix">
+    <img id="img_pic" src="" alt="">
+
+    <div class="copy_list">
+        <button class="copy_btn" id="copy_btn_orange">
+            原图
+        </button>
+        <div id="other_btn">
+
+        </div>
+
+    </div>
+</div>
 </body>
 <script src="/static/js/index.js"></script>
 </html>

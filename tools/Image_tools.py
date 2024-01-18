@@ -5,9 +5,11 @@ from io import BytesIO
 
 from PIL import Image
 
+from app.utils import cut_dir
+
 
 class IM:
-    def __init__(self, image: Union[str, Path, Image.Image]):
+    def __init__(self, image: Union[str, Path, bytes, Image.Image]):
         if isinstance(image, Image.Image):
             self.image = image
         elif isinstance(image, str):
@@ -19,9 +21,12 @@ class IM:
                 self.image = Image.open(image)
         elif isinstance(image, Path):
             self.image = Image.open(image)
+        elif isinstance(image, bytes):
+            self.image = Image.open(BytesIO(image))
         else:
             raise TypeError("image must be str, Path or Image.Image")
-        self.img_type = self.image.format.lower()
+        self.img_type = self.image.format
+        print(self.img_type)
         self.quality = 100
 
     # 图片裁剪/缩放
@@ -52,6 +57,41 @@ class IM:
         # 裁剪图片
         img_cropped = img.crop((left, top, right, bottom))
         self.image = img_cropped
+
+
+    # 图片等比例缩放
+    def resize(self, width: int = None, height: int = None):
+        """
+        等比例缩放图片，如果只提供了宽度或高度，则按比例缩放
+        :param width:
+        :param height:
+        :return:
+        """
+        # 记录计算的宽度或高度
+        num = 0
+        # 获取原始图像的尺寸
+        orig_width, orig_height = self.image.size
+
+        # 如果只提供了宽度
+        if width is not None and height is None:
+            ratio = width / orig_width
+            height = int(orig_height * ratio)
+            num = height
+
+        # 如果只提供了高度
+        elif height is not None and width is None:
+            ratio = height / orig_height
+            width = int(orig_width * ratio)
+            num = width
+
+        # 如果宽度和高度都没有提供
+        elif width is None and height is None:
+            return
+
+        # 进行缩放
+        resized_image = self.image.resize((width, height))
+        self.image = resized_image
+        return num
 
 
     # 图片添加水印
@@ -146,4 +186,5 @@ class IM:
         :param path: 保存路径
         :return:
         """
+        cut_dir(path)
         self.image.save(path, format=self.img_type, quality=self.quality)
