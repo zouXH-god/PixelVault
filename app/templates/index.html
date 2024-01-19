@@ -35,7 +35,7 @@
                 <img class="show_img"
                      src="{{ img.url }}&size=100x100"
                      alt="{{ img.filename }}"
-                    onclick="show_img('{{ img.url }}', {{ img.thumbnails }})"
+                    onclick="show_img('{{ img.url }}', {{ img }})"
                 >
             </li>
         {% endfor %}
@@ -44,6 +44,14 @@
 </div>
 <div class="img_info_box_fix" id="img_info_box_fix">
     <img id="img_pic" src="" alt="">
+
+    <div class="img_info">
+        <div class="img_name"></div>
+        <div class="img_time"></div>
+        <div class="img_size"></div>
+        <div class="img_w_h">
+        </div>
+    </div>
 
     <div class="copy_list">
         <button class="copy_btn" id="copy_btn_orange">
@@ -56,5 +64,6 @@
     </div>
 </div>
 </body>
+<script src="/static/js/jq.js"></script>
 <script src="/static/js/index.js"></script>
 </html>

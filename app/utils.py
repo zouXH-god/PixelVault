@@ -137,6 +137,10 @@ def get_image_list(uid):
                         ).first()
                         if img:
                             url = f"{Config.HTTP_ROOT_PATH}?id={img_data.id}&size={img.width}x{img.height}"
+                            thumbnail_list.append({
+                                'size': f"{img.height}x{img.width}",
+                                'url': url
+                            })
                     # 若没有指定宽高，则查询按比例缩放
                     else:
                         if thumbnail.SIZE[0] == "auto":
@@ -153,18 +157,22 @@ def get_image_list(uid):
                             ).first()
                         if img:
                             url = f"{Config.HTTP_ROOT_PATH}?id={img_data.id}&width={img.width}&height={img.height}"
-                    if img:
-                        thumbnail_list.append({
-                            'size': f"{img.height}x{img.width}",
-                            'url': url
-                        })
+                            thumbnail_list.append({
+                                'size': f"{img.height}x{img.width}",
+                                'url': url
+                            })
             image_list.append({
-                'path': img_data.original_url,
+                'original_name': img_data.original_name,
                 'filename': img_data.saved_name,
+                'size': kb_to_mb(img_data.size),
+                'width': img_data.width,
+                'height': img_data.height,
                 'url': f"{Config.HTTP_ROOT_PATH}?id={img_data.id}",
                 "thumbnails": thumbnail_list,
+                "upload_time": img_data.upload_time.strftime("%Y-%m-%d %H:%M:%S"),
             })
-    return image_list
+    # 列表倒序返回
+    return image_list[::-1]
 
 
 # 获取token
@@ -233,3 +241,13 @@ def get_user_info(user_id):
         }
     else:
         return None
+
+
+# 将kb值根据大小转换为MB或GB
+def kb_to_mb(b):
+    if b < 1024:
+        return f"{b}b"
+    elif b < 1024 * 1024:
+        return f"{round(b / 1024, 2)}KB"
+    else:
+        return f"{round(b / 1024 / 1024, 2)}MB"

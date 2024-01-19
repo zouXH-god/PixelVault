@@ -85,15 +85,25 @@ function setupDragAndDrop() {
 
 window.onload = setupDragAndDrop;
 
-function show_img(url, data) {
+function show_img(url, img_data) {
     document.getElementById("img_info_box_fix").style.display = "block";
     document.getElementById("other_btn").innerHTML = "";
+    var data = img_data.thumbnails
+    // 将url赋值给img标签
     var img = document.getElementById('img_pic');
     img.src = url + "&width=300";
+    // 赋值图片信息
+    console.log($(".img_info"))
+    $(".img_name").text(img_data.original_name);
+    $(".img_time").text(img_data.upload_time);
+    $(".img_size").text(img_data.size);
+    $(".img_w_h").text(img_data.width + "px * " + img_data.height + "px");
+    // 给原图按钮添加点击复制事件
     document.getElementById("copy_btn_orange").onclick = function () {
         copy_url(url)
     };
-    console.log(data)
+    console.log(img_data)
+    // 给其他尺寸按钮添加点击复制事件
     for (const index in data) {
         var button = document.createElement('button');
         button.className = "copy_btn";
