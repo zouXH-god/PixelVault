@@ -4,7 +4,8 @@
 
 **PixelVault** 是一个基于 Flask 构建的高效图床应用，旨在提供一个简单、快捷且功能丰富的图片存储解决方案。该应用不仅支持基础的图片上传功能，还集成了一系列智能处理工具，使得图片管理变得更为高效和安全。
 ![image](https://github.com/zouXH-god/PixelVault/assets/77649130/8f50e6a6-1e4f-4790-8822-3c712add36e0)
-![Uploading image.png…]()
+![image](https://github.com/zouXH-god/PixelVault/assets/77649130/429f86bc-a50e-4301-ad09-cc222c37597b)
+
 
 
 
